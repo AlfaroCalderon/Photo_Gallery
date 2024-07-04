@@ -1,11 +1,23 @@
+<?php 
+session_start();
+
+if(empty($_SESSION['username'])){
+    header('Location: /curso_php/practicas/galeria/index.php'); 
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <title>Gallery</title>
 </head>
+<script defer>
+let logout = () => {
+    window.location.href = 'http://localhost/curso_php/practicas/galeria/logout.php';
+};
+
+</script>
 
 <style>
     img:hover {
@@ -17,8 +29,14 @@
 
 <body style="background-color: #023245;">
     <section class="container-fluid">
-
-        <article class="row mt-5">
+        <article class="row d-flex justify-content-center">
+            <div class="col-sm-8 col-md-8 col-lg-8 col-xl-8 mt-3">
+                <a class="btn btn-lg btn-danger float-end" onclick="logout();">
+                    Logout
+                </a>
+            </div>
+        </article>
+        <article class="row">
             <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12">
                 <h1 class="text-center" style="color: white;">My incredible gallery with PHP and MYSQL</h1>
             </div>
@@ -46,19 +64,19 @@
             <div class="col-sm-12 col-md-12 col-lg-8 col-xl-8 text-center">
                 <?php if ($page == 1) : ?>
                     <a href="http://localhost/curso_php/practicas/galeria?page=<?php echo $page - 1; ?>" class="float-start btn btn-primary rounded-pill disabled"><i class="fa-solid fa-arrow-left"></i><span style="margin-left:10px;">Previous page</span></a>
-                <?php else: ?>
+                <?php else : ?>
                     <a href="http://localhost/curso_php/practicas/galeria?page=<?php echo $page - 1; ?>" class="float-start btn btn-primary rounded-pill"><i class="fa-solid fa-arrow-left"></i><span style="margin-left:10px;">Previous page</span></a>
                 <?php endif; ?>
 
-                    <a href="http://localhost/curso_php/practicas/galeria/upload_foto.php" class="btn btn-success rounded-pill">Insert new photo</a>
+                <a href="http://localhost/curso_php/practicas/galeria/upload_foto.php" class="btn btn-success rounded-pill">Insert new photo</a>
 
                 <?php if ($page == $number_of_pages) : ?>
                     <a href="http://localhost/curso_php/practicas/galeria?page=<?php echo $page + 1; ?>" class="float-end btn btn-primary rounded-pill disabled"><span style="margin-right: 10px;">Next page </span><i class="fa-solid fa-arrow-right"></i></a>
-                <?php else: ?>
+                <?php else : ?>
                     <a href="http://localhost/curso_php/practicas/galeria?page=<?php echo $page + 1; ?>" class="float-end btn btn-primary rounded-pill"><span style="margin-right: 10px;">Next page </span><i class="fa-solid fa-arrow-right"></i></a>
                 <?php endif; ?>
 
-              
+
             </div>
         </div>
     </section>

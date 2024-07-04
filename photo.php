@@ -1,6 +1,8 @@
 <?php 
-require './functions.php';
+session_start();
 
+if(!empty($_SESSION['username'])){
+require './functions.php';
 $connection = connection('gallery', 'root', '');
 $statement = $connection->prepare("SELECT photo_id AS 'id', photo_title AS 'title', photo_file AS 'file', photo_description AS 'description' FROM photo WHERE photo_id = :id");
 $statement->execute([
@@ -10,5 +12,8 @@ $statement->execute([
 $photo = $statement->fetch();
 
 require_once './views/view_photo.php';
+}else{
+    header('Location: login.php');
+}
 
 ?>

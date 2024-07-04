@@ -1,4 +1,6 @@
 <?php
+session_start();
+if(!empty($_SESSION['username'])){
 //So we can use the connection we need to call the file called functions.php where the connection is processed 
 require './functions.php';
 
@@ -61,3 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 
 require './views/view_upload_photo.php';
+
+}else{
+    header('Location: login.php');
+}
