@@ -68,10 +68,13 @@
                     </table>
 
                     <div class="text-center">
-                        <button type="submit" class="btn btn-lg btn-primary rounded-pill">Login</button>
+                        <button type="submit" class="btn btn-lg btn-primary rounded-pill">Log in</button>
                     </div>
                 </form>
             </div>
+        </article>
+        <article class="row mt-3 text-center">
+                <p style="color: white;">To get your own personal gallery please <a href="./signup.php">Signup</a></p>
         </article>
 
     </section>

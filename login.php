@@ -27,6 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     if(empty($error)){
+       $password = hash('sha512', $password);
        $statement = $connection->prepare("SELECT * FROM users WHERE user_name = :username AND user_password = :password");
        $statement->execute([
          ':username' => $username,
