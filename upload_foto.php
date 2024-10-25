@@ -4,7 +4,7 @@ if(!empty($_SESSION['username'])){
 //So we can use the connection we need to call the file called functions.php where the connection is processed 
 require './functions.php';
 
-//Inside this function we make the conection to the db so we can build our queries below besides this function is gonna return the connection or false 
+//Inside this function we make the conection to the db so we can build our queries below, besides this function is gonna return the connection or false 
 $connection = connection('gallery', 'root', '');
 
 //Here we evaluate if the function returns false or return a connection 
@@ -47,11 +47,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             move_uploaded_file($_FILES['image']['tmp_name'], $image_ubication);
 
             //Right now we are gonna prepare our query to be sent 
-            $statement = $connection->prepare("INSERT INTO photo (photo_title, photo_file, photo_description) VALUES (:title, :photo_file, :description)");
+            $statement = $connection->prepare("INSERT INTO photo (photo_title, photo_file, photo_description, user) VALUES (:title, :photo_file, :description, :user)");
             $statement->execute([
                 ":title" => $_POST['title'],
                 ":photo_file" => $_FILES['image']['name'],
-                ":description" => $_POST['description']
+                ":description" => $_POST['description'],
+                ":user" => $_POST['user']
             ]);
 
             //Lastly, we redirect back to the index

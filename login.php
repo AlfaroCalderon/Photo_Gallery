@@ -34,8 +34,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
          ':password' => $password
        ]);
 
+       $results = $statement->fetch();
+       $userrole = $results['role'];
+       $userid = $results['user_id'];
+
        if($statement->rowCount() >= 1){
         $_SESSION['username'] = $username;
+        $_SESSION['user_role'] = $userrole;
+        $_SESSION['user_id'] = $userid;
         header('Location: index.php');
        }else{
         $error .= 'Username or password is incorrect';
@@ -43,7 +49,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
 }
-
-
 
 require_once './views/view_login.php';

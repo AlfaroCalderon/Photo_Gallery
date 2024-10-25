@@ -47,10 +47,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     if(empty($error)){
         $password = hash('sha512', $password);
-        $statement = $connection->prepare("INSERT INTO users (user_name, user_password) VALUES (:username, :password)");
+        $statement = $connection->prepare("INSERT INTO users (user_name, user_password, role) VALUES (:username, :password, :role)");
         $statement->execute([
             ':username' => $username,
-            ':password' => $password    
+            ':password' => $password,
+            ':role' => '2'  
         ]);
         header('Location: index.php');
     }
